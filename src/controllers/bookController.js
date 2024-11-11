@@ -62,10 +62,17 @@ const getAllBooks = (request, h) => {
     books = books.filter(book => book.finished === (finished === '1'));
   }
 
+  // Menyaring hanya properti id, name, dan publisher
+  const filteredBooks = books.map(book => ({
+    id: book.id,
+    name: book.name,
+    publisher: book.publisher
+  }));
+
   return h.response({
     status: 'success',
     data: {
-      books
+      books: filteredBooks
     }
   }).code(200);
 };
